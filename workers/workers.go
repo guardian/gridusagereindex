@@ -10,7 +10,7 @@ type JobResult struct {
 	Id     string
 }
 
-func Worker(id int, jobs <-chan string, results chan<- JobResult, usageService *gogridclient.UsageService) {
+func ReindexWorker(id int, jobs <-chan string, results chan<- JobResult, usageService *gogridclient.UsageService) {
 	for j := range jobs {
 		log.Println("worker", id, "processing job", j)
 
