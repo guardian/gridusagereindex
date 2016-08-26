@@ -14,5 +14,8 @@ Requires `config.json` in the same folder as the executable:
   "CapiApiKey": "my-capi-api-key",
   "UsageUrl": "https://usage.example.com",
   "GridApiKey": "my-grid-api-key"
+  "GobbyFile": "/var/tmp/gobbyfile",
+  "FromDate": "2014-02-16",
+  "ToDate": "2014-02-17"
 }
 ```

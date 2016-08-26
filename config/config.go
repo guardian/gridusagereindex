@@ -11,6 +11,9 @@ type AppConfig struct {
 	CapiApiKey string
 	UsageUrl   string
 	GridApiKey string
+	GobbyFile  string
+	FromDate   string
+	ToDate     string
 }
 
 func LoadConfig() *AppConfig {
