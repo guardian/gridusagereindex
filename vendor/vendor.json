@@ -1,0 +1,79 @@
+{
+	"comment": "",
+	"ignore": "",
+	"package": [
+		{
+			"checksumSHA1": "6Lb7h/mj8rBtSQPV1O3RxxfBvNE=",
+			"path": "git.apache.org/thrift.git/lib/go/thrift",
+			"revision": "bcad91771b7f0bff28a1cac1981d7ef2b9bcef3c",
+			"revisionTime": "2016-07-24T10:11:25Z"
+		},
+		{
+			"checksumSHA1": "UFMIZwGXc2hWLcfJCEw2Xz78wsM=",
+			"path": "github.com/guardian/gobby",
+			"revision": "77c668a4d48b5be8538983c457c911564042331f",
+			"revisionTime": "2016-09-12T09:15:34Z"
+		},
+		{
+			"checksumSHA1": "yUToQwp5702rBnaYhbUakXlFDn0=",
+			"path": "github.com/guardian/gocapiclient",
+			"revision": "1c57ef65d975927810ca8890b907dd397601197f",
+			"revisionTime": "2016-08-26T13:31:15Z"
+		},
+		{
+			"checksumSHA1": "LeI6e0S308UDh/PODmfehvXKvGA=",
+			"path": "github.com/guardian/gocapiclient/queries",
+			"revision": "1c57ef65d975927810ca8890b907dd397601197f",
+			"revisionTime": "2016-08-26T13:31:15Z"
+		},
+		{
+			"checksumSHA1": "53t7stOVxnetdYWFQEI5OpVzpbo=",
+			"path": "github.com/guardian/gocapimodels/content",
+			"revision": "b03d1b73ea35f5c437985748aed142dbfbbc958c",
+			"revisionTime": "2016-08-15T13:08:10Z"
+		},
+		{
+			"checksumSHA1": "ZwaJcXFzjil1hRY0ssW4TCl6FVk=",
+			"path": "github.com/guardian/gocapimodels/contentatom",
+			"revision": "b03d1b73ea35f5c437985748aed142dbfbbc958c",
+			"revisionTime": "2016-08-15T13:08:10Z"
+		},
+		{
+			"checksumSHA1": "ySdgEI1lk3csSvmsvkKDm1/Qxq4=",
+			"path": "github.com/guardian/gocapimodels/contentatom/explainer",
+			"revision": "b03d1b73ea35f5c437985748aed142dbfbbc958c",
+			"revisionTime": "2016-08-15T13:08:10Z"
+		},
+		{
+			"checksumSHA1": "S1HS5Bh68LegmIGCXHe3gOULj/w=",
+			"path": "github.com/guardian/gocapimodels/contentatom/media",
+			"revision": "b03d1b73ea35f5c437985748aed142dbfbbc958c",
+			"revisionTime": "2016-08-15T13:08:10Z"
+		},
+		{
+			"checksumSHA1": "l5C/jrWINBGCnCwYQzaEo7HeSlI=",
+			"path": "github.com/guardian/gocapimodels/contentatom/quiz",
+			"revision": "b03d1b73ea35f5c437985748aed142dbfbbc958c",
+			"revisionTime": "2016-08-15T13:08:10Z"
+		},
+		{
+			"checksumSHA1": "iFI4yRzIA73jGHw5Ut0mp+bZCr4=",
+			"path": "github.com/guardian/gocapimodels/shared",
+			"revision": "b03d1b73ea35f5c437985748aed142dbfbbc958c",
+			"revisionTime": "2016-08-15T13:08:10Z"
+		},
+		{
+			"checksumSHA1": "nHqrcJ+GrY6M7gjbZW5xKr3ku5s=",
+			"path": "github.com/guardian/gocapimodels/story_package_article",
+			"revision": "b03d1b73ea35f5c437985748aed142dbfbbc958c",
+			"revisionTime": "2016-08-15T13:08:10Z"
+		},
+		{
+			"checksumSHA1": "r4tW49BgD3g1DbOJEsdr5sMsqnU=",
+			"path": "github.com/guardian/gogridclient",
+			"revision": "8a6e2511feb1c2e7e7a825ba2f8fd10c0f7128e7",
+			"revisionTime": "2016-08-25T13:03:56Z"
+		}
+	],
+	"rootPath": "github.com/guardian/gridusagereindex"
+}
