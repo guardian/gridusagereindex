@@ -6,7 +6,6 @@ import (
 	"github.com/guardian/gocapiclient/queries"
 	"github.com/guardian/gogridclient"
 	"github.com/guardian/gridusagereindex/config"
-	"github.com/guardian/gridusagereindex/workers"
 	"log"
 	"time"
 )
@@ -25,41 +24,7 @@ func main() {
 	searchQueryPaged(client, gobdb)
 }
 
-func createJobs(jobIterator <-chan *queries.SearchPageResponse, gobdb *gobby.Gobby) <-chan workers.JobResult {
-	jobs := make(chan string, 50)
-	results := make(chan workers.JobResult)
-
-	defer close(jobs)
-	defer close(results)
-
-	usageService := gogridclient.NewUsageService(
-		appConfig.UsageUrl, appConfig.GridApiKey)
-
-	for w := 1; w <= 3; w++ {
-		go workers.ReindexWorker(w, jobs, results, usageService, gobdb)
-	}
-
-	go workers.ResultWorker(results)
-
-	for page := range jobIterator {
-		if page.Err != nil {
-			log.Fatal(page.Err)
-		}
-
-		for _, v := range page.SearchResponse.Results {
-			jobs <- v.ID
-		}
-
-		gobdb.Save()
-	}
-
-	return results
-}
-
 func searchQueryPaged(client *gocapiclient.GuardianContentClient, gobdb *gobby.Gobby) {
-	searchQuery := queries.NewSearchQuery()
-	searchQuery.PageOffset = int64(10)
-
 	fromDate := appConfig.FromDate
 	toDate := appConfig.ToDate
 
@@ -83,6 +48,7 @@ func searchQueryPaged(client *gocapiclient.GuardianContentClient, gobdb *gobby.G
 	var toString string
 
 	for from.Before(to) {
+		searchQuery := queries.NewSearchQuery()
 		nextDay = from.Add(time.Hour * 24)
 
 		fromString = from.Format(dateLayout)
@@ -106,9 +72,39 @@ func searchQueryPaged(client *gocapiclient.GuardianContentClient, gobdb *gobby.G
 		searchQuery.Params = params
 
 		iterator := client.SearchQueryIterator(searchQuery)
-		results := createJobs(iterator, gobdb)
+		usageService := gogridclient.NewUsageService(
+			appConfig.UsageUrl, appConfig.GridApiKey)
 
-		<-results
+		for page := range iterator {
+			if page.Err != nil {
+				log.Println("Could not process page!", page.Err)
+				continue
+			}
+
+			for _, v := range page.SearchResponse.Results {
+				log.Println("Processing job", v.ID)
+
+				_, exists := gobdb.Get(v.ID)
+
+				if exists {
+					log.Println("Already seen", v.ID, "(skipping)")
+					continue
+				}
+
+				response, err := usageService.Reindex(v.ID)
+				jobStatus := gobby.JobStatus{v.ID, response.Status, nil}
+
+				gobdb.Set(v.ID, jobStatus)
+
+				if err != nil {
+					log.Println("Error reading from CAPI", err)
+				}
+
+				log.Println("Done:", v.ID, "::", response.Status)
+			}
+
+			gobdb.Save()
+		}
 
 		jobStatus := gobby.JobStatus{gobbyJobId, "done", nil}
 

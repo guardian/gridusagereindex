@@ -19,7 +19,7 @@ type AppConfig struct {
 func LoadConfig() *AppConfig {
 	var c *AppConfig = &AppConfig{}
 
-	configBytes, err := ioutil.ReadFile("config.json")
+	configBytes, err := ioutil.ReadFile("/etc/gridusagereindex.json")
 	if err != nil {
 		log.Fatal(err)
 	}
